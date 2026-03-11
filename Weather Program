@@ -1,0 +1,61 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+void calcWindChill(double tempF, double windMph, double &windChill);
+void calcCloudBase(double tempF, double dewPoint, double &cloudBase);
+
+int main() {
+    double TemperatureF, windspdmph, Wchill = 0, Dpoint, cloudBase = 0;
+
+    cout << "Enter the current Temperature in Fahrenheit: ";
+    while (!(cin >> TemperatureF)) {
+        cout << "Invalid input. Try again: ";
+        cin.clear();
+        cin.ignore(10000, '\n');
+    }
+
+    cout << "Enter the wind speed in miles per hour: ";
+    while (!(cin >> windspdmph)) {
+        cout << "Invalid input. Try again: ";
+        cin.clear();
+        cin.ignore(10000, '\n');
+    }
+
+    cout << "Enter the Dew Point (F): ";
+    while (!(cin >> Dpoint)) {
+        cout << "Invalid input. Try again: ";
+        cin.clear();
+        cin.ignore(10000, '\n');
+    }
+
+    calcWindChill(TemperatureF, windspdmph, Wchill);
+    calcCloudBase(TemperatureF, Dpoint, cloudBase);
+
+    cout << "The wind chill for today is: " << Wchill << " F" << endl;
+    cout << "Estimated cloud base is: " << cloudBase << " feet" << endl;
+
+    return 0;
+}
+
+void calcWindChill(double tempF, double windMph, double &windChill) {
+
+    if (windMph < 0) {
+        windChill = tempF;  // fallback value
+        return;
+    }
+
+    windChill = 35.74 + (0.6215 * tempF)
+                - (35.75 * pow(windMph, 0.16))
+                + (0.4275 * tempF * pow(windMph, 0.16));
+}
+
+void calcCloudBase(double tempF, double dewPoint, double &cloudBase) {
+
+    if (dewPoint > tempF) {
+        cloudBase = 0; // fallback
+        return;
+    }
+
+    cloudBase = (tempF - dewPoint) * 222;
+}
