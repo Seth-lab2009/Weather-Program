@@ -3,66 +3,67 @@
 using namespace std;
 
 // Functions of Wind Chill and Cloud Base
-void calcWindChill(double tempF, double windMph, double &windChill);
-void calcCloudBase(double tempF, double dewPoint, double &cloudBase);
+void calcWindChill(double &tempF, double &windMph, double &windChill);
+void calcCloudBase(double tempF, double &dewPoint, double &cloudBase);
 
 int main() {
-    double tempF, windMph, dewPoint;
-    double windChill = 0;
-    double cloudBase = 0;
-     
-    cout << "Hello, welcome to the weather calculator.\n";
-      
-    cout << "Enter the temperature in Fahrenheit: ";
-    while (!(cin >> tempF)) {
-        cout << "Invalid input. Try again: ";
-        cin.clear();
-        cin.ignore(10000, '\n');
-    }
+	double tempF, windMph, dewPoint;
+	double windChill = 0;
+	double cloudBase = 0;
 
-    cout << "Enter the wind speed in mph: ";
-    while (!(cin >> windMph)) {
-        cout << "Invalid input. Try again: ";
-        cin.clear();
-        cin.ignore(10000, '\n');
-    }
+	
+     cout << "Hello, welcome to the weather calculator.\n";
+    void calcWindChill(double tempF, double windMph, double &windChill);
+	cout << "Enter the temperature in Fahrenheit: ";
+	while (!(cin >> tempF)) {
+		cout << "Invalid input. Try again: ";
+		cin.clear();
+		cin.ignore(10000, '\n');
+	}
 
-    cout << "Enter the dew point (F): ";
-    while (!(cin >> dewPoint)) {
-        cout << "Invalid input. Try again: ";
-        cin.clear();
-        cin.ignore(10000, '\n');
-    }
+	cout << "Enter the wind speed in mph: ";
+	while (!(cin >> windMph)) {
+		cout << "Invalid input. Try again: ";
+		cin.clear();
+		cin.ignore(10000, '\n');
+	}
+void calcCloudBase(double tempF, double dewPoint, double &cloudBase);
+	cout << "Enter the dew point (F): ";
+	while (!(cin >> dewPoint)) {
+		cout << "Invalid input. Try again: ";
+		cin.clear();
+		cin.ignore(10000, '\n');
+	}
 
-    //How to get the Wind Chill and Cloud Base
-    calcWindChill(tempF, windMph, windChill);
-    calcCloudBase(tempF, dewPoint, cloudBase);
+	//How to get the Wind Chill and Cloud Base
+	calcWindChill(tempF, windMph, windChill);
+	calcCloudBase(tempF, dewPoint, cloudBase);
 
-    cout << "Wind Chill: " << windChill << " F" << endl;
-    cout << "Estimated Cloud Base: " << cloudBase << " feet" << endl;
+	cout << "Wind Chill: " << windChill << " F" << endl;
+	cout << "Estimated Cloud Base: " << cloudBase << " feet" << endl;
 
-    return 0;
+	return 0;
 }
 
-// Wind chill calculation 
+// Wind chill calculation
 void calcWindChill(double tempF, double windMph, double &windChill) {
-    if (windMph < 3) {
-        windChill = tempF;
-        return;
-    }
+	if (windMph < 3) {
+		windChill = tempF;
+		return;
+	}
 
-    windChill = 35.74 
-              + (0.6215 * tempF)
-              - (35.75 * pow(windMph, 0.16))
-              + (0.4275 * tempF * pow(windMph, 0.16));
+	windChill = 35.74
+	            + (0.6215 * tempF)
+	            - (35.75 * pow(windMph, 0.16))
+	            + (0.4275 * tempF * pow(windMph, 0.16));
 }
 
-// Cloud base calculation 
+// Cloud base calculation
 void calcCloudBase(double tempF, double dewPoint, double &cloudBase) {
-    if (dewPoint > tempF) {
-        cloudBase = 0;
-        return;
-    }
+	if (dewPoint > tempF) {
+		cloudBase = 0;
+		return;
+	}
 
-    cloudBase = (tempF - dewPoint) * 222;
+	cloudBase = (tempF - dewPoint) * 222;
 }
