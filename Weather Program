@@ -3,45 +3,52 @@
 using namespace std;
 
 // Functions are declared here
-void runWeatherProgram();
-double calculateWindChill(double tempF, double windMph);
-double calculateCloudBase(double tempF, double dewPointF);
 
+void runWeatherProgram();
+// Function used to run the main program.
+void calculatewindChill(double& tempF, double& windMph);
+// This takes the input from the user and calculates wind chill based on temperature, and windspeed.
+void calculatecloudBase(double& tempF, double& dewPointF, double& cloudBase);
+// The cloud base function takes the temperature, dew point, and cloud base and outputs the cloud base height based on the numbers entered.
 int main() {
-    cout << "Weather Calculator\n";
-    runWeatherProgram();  // The 
-    return 0;
+	cout << "Weather Calculator\n";
+	runWeatherProgram();  // The
+	return 0;
 }
 
 //  Input, function calls, and output
 void runWeatherProgram() {
-    double tempF, windMph, dewPointF;
+	double tempF, windMph, dewPointF, windChill,cloudBase;
 
-    cout << "Enter temperature (°F): ";
-    cin >> tempF;
+	cout << "Enter temperature (B0F): ";
+	cin >> tempF;
 
-    cout << "Enter wind speed (mph): ";
-    cin >> windMph;
+	cout << "Enter wind speed (mph): ";
+	cin >> windMph;
 
-    cout << "Enter dew point (°F): ";
-    cin >> dewPointF;
+	cout << "Enter dew point (B0F): ";
+	cin >> dewPointF;
 
-    double windChill = calculateWindChill(tempF, windMph);
-    double cloudBase = calculateCloudBase(tempF, dewPointF);
+	calculatewindChill(tempF, windMph);
+	calculatecloudBase(tempF, dewPointF, cloudBase);
 
-    if (tempF <= 50 && windMph >= 3) {
-        cout << "\nWind Chill: " << windChill << " °F" << endl;
-    } else {
-        cout << "\nWind Chill not valid for these conditions." << endl;
-    }
+	if (tempF <= 50 && windMph >= 3) {
+		cout << "\nWind Chill: " << windChill << " B0F" << endl;
+	} else {
+		cout << "\nWind Chill not valid for these conditions." << endl;
+	}
 
-    cout << "Cloud Base: " << cloudBase << " feet" << endl;
+	cout << "Cloud Base: " << cloudBase << " feet" << endl;
 }
 
 // Wind chill function
-double calculateWindChill(double tempF, double windMph) {
-    return 35.74 + (0.6215 * tempF)
-         - (35.75 * pow(windMph, 0.16))
-         + (0.4275 * tempF * pow(windMph, 0.16));
+void calculatewindChill(double& tempF, double& windMph) {
+	 35.74 + (0.6215 * tempF)
+	       - (35.75 * pow(windMph, 0.16))
+	       + (0.4275 * tempF * pow(windMph, 0.16));
 }
 
+// Cloud base function
+void calculatecloudBase(double& tempF, double& dewPointF, double& cloudBase) {
+	cloudBase = 1000.0 * (tempF - dewPointF) / 4.4;
+}
