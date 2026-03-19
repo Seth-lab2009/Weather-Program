@@ -2,34 +2,34 @@
 #include <cmath>
 using namespace std;
 
-// Function prototypes
-void runProgram();
+// Functions are declared here
+void runWeatherProgram();
 double calculateWindChill(double tempF, double windMph);
 double calculateCloudBase(double tempF, double dewPointF);
 
 int main() {
     cout << "Weather Calculator\n";
-    runProgram();  // everything else happens here
+    runWeatherProgram();  // The 
     return 0;
 }
 
-// Handles input, function calls, and output
-void runProgram() {
-    double temp, wind, dewPoint;
+//  Input, function calls, and output
+void runWeatherProgram() {
+    double tempF, windMph, dewPointF;
 
     cout << "Enter temperature (°F): ";
-    cin >> temp;
+    cin >> tempF;
 
     cout << "Enter wind speed (mph): ";
-    cin >> wind;
+    cin >> windMph;
 
     cout << "Enter dew point (°F): ";
-    cin >> dewPoint;
+    cin >> dewPointF;
 
-    double windChill = calculateWindChill(temp, wind);
-    double cloudBase = calculateCloudBase(temp, dewPoint);
+    double windChill = calculateWindChill(tempF, windMph);
+    double cloudBase = calculateCloudBase(tempF, dewPointF);
 
-    if (temp <= 50 && wind >= 3) {
+    if (tempF <= 50 && windMph >= 3) {
         cout << "\nWind Chill: " << windChill << " °F" << endl;
     } else {
         cout << "\nWind Chill not valid for these conditions." << endl;
@@ -45,7 +45,3 @@ double calculateWindChill(double tempF, double windMph) {
          + (0.4275 * tempF * pow(windMph, 0.16));
 }
 
-// Cloud base function
-double calculateCloudBase(double tempF, double dewPointF) {
-    return (tempF - dewPointF) * 222;
-}
