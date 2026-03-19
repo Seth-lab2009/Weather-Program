@@ -20,17 +20,17 @@ int main() {
 void runWeatherProgram() {
 	double tempF, windMph, dewPointF, windChill,cloudBase;
 
-	cout << "Enter temperature (B0F): ";
+	cout << "Enter temperature (F): ";
 	cin >> tempF;
 
 	cout << "Enter wind speed (mph): ";
 	cin >> windMph;
 
-	cout << "Enter dew point (B0F): ";
+	cout << "Enter dew point (F): ";
 	cin >> dewPointF;
 
-	calculatewindChill(tempF, windMph);
-	calculatecloudBase(tempF, dewPointF, cloudBase);
+	calculatewindChill(tempF, windMph );  // This function calls upon the calculation for Wind Chill
+	calculatecloudBase(tempF, dewPointF, cloudBase); // This function calls upon the  calculations for cloud base height
 
 	if (tempF <= 50 && windMph >= 3) {
 		cout << "\nWind Chill: " << windChill << " B0F" << endl;
