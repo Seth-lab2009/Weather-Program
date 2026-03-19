@@ -18,7 +18,7 @@ int main() {
 
 //  Input, function calls, and output
 void runWeatherProgram() {
-	double tempF, windMph, dewPointF, windChill,cloudBase;
+	double tempF, windMph, dewPointF, windChill,cloudBase; // All the main variables within this program are located here
 
 	cout << "Enter temperature (F): ";
 	cin >> tempF;
